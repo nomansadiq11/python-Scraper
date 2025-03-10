@@ -1,0 +1,13 @@
+version: "3.9"
+
+services:
+  python_app:
+    build: .
+    container_name: my_python_app
+    volumes:
+      - ./app/:/app/  # Map volume
+    ports:
+      - "8000:8000"  # Change if your app uses another port
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: always
