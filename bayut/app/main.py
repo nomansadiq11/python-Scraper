@@ -44,10 +44,10 @@ def scrape_page(url, conn):
 # Create SQLite database and table
 conn = sqlite3.connect('property_data.db')
 cursor = conn.cursor()
-cursor.execute("CREATE TABLE IF NOT EXISTS properties (title TEXT, price TEXT, location TEXT, sqft TEXT, link TEXT)")
+cursor.execute("CREATE TABLE IF NOT EXISTS properties (Id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, price TEXT, location TEXT, sqft TEXT, link TEXT, sc TEXT, ownership TEXT, yofcom TEXT)")
 
 # Scrape all pages
-base_url = "https://www.bayut.com/for-sale/studio-apartments/dubai/"
+base_url = "https://www.bayut.com/for-sale/1-bedroom-property/dubai/"
 
 # this line for testing on single page
 # scrape_page(url, conn)
@@ -55,7 +55,8 @@ base_url = "https://www.bayut.com/for-sale/studio-apartments/dubai/"
 total_pages = 3  # Modify this value based on the total number of pages to scrape
 
 for page in range(1, total_pages + 1):
-    url = base_url + "jumeirah-village-circle-jvc/page-" + str(page)  + "/?sort=price_asc&price_max=500000&completion_status=ready"
+    url = base_url + "page-" + str(page)  + "/?price_max=600000&completion_status=ready"
+    # url = base_url + "jumeirah-village-circle-jvc/page-" + str(page)  + "/?sort=price_asc&price_max=500000&completion_status=ready"
     scrape_page(url, conn)
 
 # Close the database connection
